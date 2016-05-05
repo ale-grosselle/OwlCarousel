@@ -913,6 +913,9 @@ if (typeof Object.create !== "function") {
             }
 
             function dragStart(event) {
+                if (typeof base.options.canIDrag === "function" && base.options.canIDrag() == false) {
+                    return;
+                }
                 var ev = event.originalEvent || event || window.event,
                     position;
 
@@ -955,6 +958,10 @@ if (typeof Object.create !== "function") {
             }
 
             function dragMove(event) {
+                if (typeof base.options.canIDrag === "function" && base.options.canIDrag() == false) {
+                    return;
+                }
+
                 var ev = event.originalEvent || event || window.event,
                     minSwipe,
                     maxSwipe;
@@ -998,6 +1005,10 @@ if (typeof Object.create !== "function") {
             }
 
             function dragEnd(event) {
+                if (typeof base.options.canIDrag === "function" && base.options.canIDrag() == false) {
+                    return;
+                }
+
                 var ev = event.originalEvent || event || window.event,
                     newPosition,
                     handlers,
@@ -1513,6 +1524,7 @@ if (typeof Object.create !== "function") {
         afterMove : false,
         afterAction : false,
         startDragging : false,
-        afterLazyLoad: false
+        afterLazyLoad: false,
+        canIDrag: false
     };
 }(jQuery, window, document));
